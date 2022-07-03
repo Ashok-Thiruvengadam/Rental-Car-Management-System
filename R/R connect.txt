@@ -1,0 +1,23 @@
+install.packages("RMySQL")
+library(RMySQL)
+#
+mydb <- dbConnect(MySQL(), user = 'root', password = 'password',
+                  dbname = 'my_db', host = 'localhost')
+#
+dbListTables(mydb)
+#
+dbListFields(mydb, 'city')
+#
+rs <- dbSendQuery(mydb, "select c1.Name 
+                  from country c1, countrylanguage c2 where c1.code = c2.countrycode
+                 and c2.language = 'english'")
+#
+mydata <- dbFetch(rs)
+#
+mydata
+#dbClearResult(rs)
+#dbDisconnect(mydb)
+
+
+install.packages("RMariaDB")
+#
